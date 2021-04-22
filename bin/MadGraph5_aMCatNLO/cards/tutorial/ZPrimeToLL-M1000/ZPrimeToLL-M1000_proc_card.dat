@@ -1,0 +1,6 @@
+import DMsimp_s_spin1_v2_0
+
+define l+ = e+ mu+ ta+
+define l- = e- mu- ta-
+
+generate p p > y1, y1 > l+ l-
