@@ -1,4 +1,4 @@
-import DMsimp_s_spin1_v2_0
+import model DMsimp_s_spin1_v2_0
 
 define l+ = e+ mu+ ta+
 define l- = e- mu- ta-
