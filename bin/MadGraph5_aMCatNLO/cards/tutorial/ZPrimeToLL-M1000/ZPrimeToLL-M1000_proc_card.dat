@@ -4,3 +4,4 @@ define l+ = e+ mu+ ta+
 define l- = e- mu- ta-
 
 generate p p > y1, y1 > l+ l-
+output ZPrimeToLL-M1000 -nojpeg
