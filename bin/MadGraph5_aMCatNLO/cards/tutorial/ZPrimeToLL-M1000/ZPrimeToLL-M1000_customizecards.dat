@@ -19,8 +19,8 @@ set param_card gvu22 0.25
 set param_card gvu33 0.25
 
 set param_card gVl11 0.1
-set param_card gVl22 0.0
-set param_card gVl33 0.0
+set param_card gVl22 0.1
+set param_card gVl33 0.1
 
 set param_card gvxc 0
 set param_card gvxd 0
