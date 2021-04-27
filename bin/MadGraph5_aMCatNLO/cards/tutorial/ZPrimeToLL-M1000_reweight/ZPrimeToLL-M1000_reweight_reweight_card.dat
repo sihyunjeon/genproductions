@@ -1,0 +1,51 @@
+change rwgt_dir rwgt
+
+launch --rwgt_name=Coup-0p01
+set param_card gvd11 0.01
+set param_card gvd22 0.01
+set param_card gvd33 0.01
+set param_card gvu11 0.01
+set param_card gvu22 0.01
+set param_card gvu33 0.01
+set param_card gVl11 0.01
+set param_card gVl22 0.01
+set param_card gVl33 0.01
+set WY1 AUTO
+
+launch --rwgt_name=Coup-0p1
+set param_card gvd11 0.1
+set param_card gvd22 0.1
+set param_card gvd33 0.1
+set param_card gvu11 0.1
+set param_card gvu22 0.1
+set param_card gvu33 0.1
+set param_card gVl11 0.1
+set param_card gVl22 0.1
+set param_card gVl33 0.1
+set WY1 AUTO
+
+launch --rwgt_name=Coup-0p3
+set param_card gvd11 0.3
+set param_card gvd22 0.3
+set param_card gvd33 0.3
+set param_card gvu11 0.3
+set param_card gvu22 0.3
+set param_card gvu33 0.3
+set param_card gVl11 0.3
+set param_card gVl22 0.3
+set param_card gVl33 0.3
+set WY1 AUTO
+
+launch --rwgt_name=Coup-1p0
+set param_card gvd11 1.0
+set param_card gvd22 1.0
+set param_card gvd33 1.0
+set param_card gvu11 1.0
+set param_card gvu22 1.0
+set param_card gvu33 1.0
+set param_card gVl11 1.0
+set param_card gVl22 1.0
+set param_card gVl33 1.0
+set WY1 AUTO
+
+
