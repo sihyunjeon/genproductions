@@ -2,9 +2,8 @@ import os
 
 # signal grid points
 masses = ["1000"]
-couplingarrays = [["0.1", "0.2", "0.5", "1.0"],
-                  ["1.0", "0.1", "0.2", "0.5"],
-                  ["0.5", "0.1", "0.2", "1.0"]]
+couplingarrays = [["0.1", "0.5", "1.0"],
+                  ["1.0", "0.5", "0.1"]]
 
 for mass in masses: # iterate over masses
   for couplingarray in couplingarrays: # iterate over couplings
