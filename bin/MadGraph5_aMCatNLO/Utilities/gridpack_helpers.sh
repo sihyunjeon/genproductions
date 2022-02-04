@@ -9,17 +9,31 @@ set_run_card_pdf () {
         pdfExtraArgs+="--is5FlavorScheme "
     fi
 
-    if grep -q -e "\$DEFAULT_PDF_SETS" $CARDSDIR/${name}_run_card.dat; then
-        local central_set=$(python ${script_dir}/getMG5_aMC_PDFInputs.py -f "central" -c 2017 $pdfExtraArgs)
-        echo "INFO: Using default PDF sets for 2017 production"
+    if [ -d  "${CARDSDIR}/PDF/" ]; then
+        pdf_path=${CARDSDIR}/PDF/
+        local central_set=$(python ${script_dir}/getMG5_aMC_PDFInputs.py -f "central" -c "campaign"  --pdf_path "${pdf_path}" ${pdfExtraArgs})
+        echo "INFO: Using PDF sets defined from campaign settings"
+        echo $central_set
+        echo $central_set
+        echo $central_set
+        echo $central_set
+#        sed "s/\$DEFAULT_PDF_SETS/${central_set}/g" ${CARDSDIR}/${name}_run_card.dat > ./Cards/run_card.dat
+        sed "s/\$DEFAULT_PDF_SETS/306000/g" ${CARDSDIR}/${name}_run_card.dat > ./Cards/run_card.dat
 
-        sed "s/\$DEFAULT_PDF_SETS/${central_set}/g" $CARDSDIR/${name}_run_card.dat > ./Cards/run_card.dat
         sed -i "s/ *\$DEFAULT_PDF_MEMBERS.*=.*//g" ./Cards/run_card.dat
-    elif grep -q -e "\$DEFAULT_PDF_SETS" -e "\$DEFAULT_PDF_MEMBERS" $CARDSDIR/${name}_run_card.dat; then
+    elif grep -q -e "\$DEFAULT_PDF_SETS" $CARDSDIR/${name}_run_card.dat; then
+        local central_set=$(python ${script_dir}/getMG5_aMC_PDFInputs.py -f "central" -c 2017 $pdfExtraArgs)
+        echo "INFO: Using default PDF sets for 2017 production"i
+        echo $central_set
+        echo $central_set
+        echo $central_set
+        echo $central_set
+        sed "s/\$DEFAULT_PDF_SETS/${central_set}/g" ${CARDSDIR}/${name}_run_card.dat > ./Cards/run_card.dat
+        sed -i "s/ *\$DEFAULT_PDF_MEMBERS.*=.*//g" ./Cards/run_card.dat
+    elif grep -q -e "\$DEFAULT_PDF_SETS" -e "\$DEFAULT_PDF_MEMBERS" ${CARDSDIR}/${name}_run_card.dat; then
         local central_set=$(python ${script_dir}/getMG5_aMC_PDFInputs.py -f "central" -c 2016 $pdfExtraArgs)
-
         echo "INFO: Using default PDF sets for 2017 production"
-        sed "s/\$DEFAULT_2016_PDF_SETS/${central_set}/g" $CARDSDIR/${name}_run_card.dat > ./Cards/run_card.dat
+        sed "s/\$DEFAULT_2016_PDF_SETS/${central_set}/g" ${CARDSDIR}/${name}_run_card.dat > ./Cards/run_card.dat
         sed -i "s/ *\$DEFAULT_PDF_MEMBERS.*=.*//g" ./Cards/run_card.dat
     else
         cat << EOF
@@ -35,6 +49,29 @@ EOF
         echo "copying run_card.dat file"
         cp $CARDSDIR/${name}_run_card.dat ./Cards/run_card.dat
    fi
+}
+
+prepare_runcmsgrid () {
+
+    name=$1
+    CARDSDIR=$2
+    is5FlavorScheme=$3
+    script_dir=$4
+
+    pdfExtraArgs=""
+    if [ $is5FlavorScheme -eq 1 ]; then
+        pdfExtraArgs+="--is5FlavorScheme "
+    fi
+    echo "$CARDSDIR/PDF"
+    if [ -d  "$CARDSDIR/PDF" ]; then
+        pdf_path=${CARDSDIR}/PDF/
+        pdfSysArgs=$(python ${script_dir}/getMG5_aMC_PDFInputs.py -f systematics -c "campaign" --pdf_path "${pdf_path}" $pdfExtraArgs)
+        sed -i s/PDF_SETS_REPLACE/${pdfSysArgs}/g runcmsgrid.sh
+    else
+        pdfSysArgs=$(python ${script_dir}/getMG5_aMC_PDFInputs.py -f systematics -c 2017 $pdfExtraArgs)
+        sed -i s/PDF_SETS_REPLACE/${pdfSysArgs}/g runcmsgrid.sh
+    fi
+
 }
 
 # Make some replacements in run card (mostly related to PDF)

@@ -15,6 +15,13 @@ class PDFSetHelper(object):
             if is5FlavorScheme else "pdflist_4f_2017.dat")
         self.readPDFsFromFile()
 
+    def readCampaignPDFsFile(self, is5FlavorScheme, pdf_path):
+
+        meta_data_dir = pdf_path
+        self.pdflist_file = meta_data_dir + "/" + ("pdflist_5f.dat" \
+            if is5FlavorScheme else "pdflist_4f.dat")
+        self.readPDFsFromFile()
+
     def readPDFsFromFile(self):
         with open(self.pdflist_file) as pdflist_file:
             for line in pdflist_file.readlines():
