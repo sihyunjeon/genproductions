@@ -79,7 +79,7 @@ make_gridpack () {
       echo $CARDSDIR/${name}_run_card.dat " does not exist!"
       if [ "${BASH_SOURCE[0]}" != "${0}" ]; then return 1; else exit 1; fi
     fi
-    
+
     # avoid compute_widths in customizecards 
     if [ -e $CARDSDIR/${name}_customizecards.dat ]; then
         if grep -F "compute_widths" $CARDSDIR/${name}_customizecards.dat ; then
@@ -200,6 +200,11 @@ make_gridpack () {
     
       if [ "$queue" == "local" ]; then
           echo "set run_mode 2" >> mgconfigscript
+
+          if [ -e $CARDSDIR/${name}_pdmv_card.dat ]; then
+              echo $CARDSDIR/${name}_pdmv_card.dat " exists"
+              echo "set nb_core $(cat ${CARDSDIR}/${name}_pdmv_card.dat)" >> mgconfigscript
+          fi
       else
           #suppress lsf emails
           export LSB_JOB_REPORT_MAIL="N"
